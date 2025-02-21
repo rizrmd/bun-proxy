@@ -12,9 +12,13 @@ export default function App({ name = "Stranger" }) {
   return (
     <FullScreen>
       <Text>
-        Proxy server running at:{" "}
+        {'Proxy: '}
         <Text color="greenBright" underline>
           http://localhost:{g.server?.port}
+        </Text>
+        {' -> '}
+        <Text color="blueBright" underline>
+          {g.targetUrl}
         </Text>
         <Newline />
         Active Request: {g.reqs.size}

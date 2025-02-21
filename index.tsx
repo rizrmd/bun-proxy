@@ -3,14 +3,13 @@ import { render } from "ink";
 import App from "./App";
 import { g } from "./global";
 
-const TARGET_URL = "https://news.ycombinator.com";
-
+g.targetUrl = "https://news.ycombinator.com";
 g.reqs = new Map();
 g.server = serve({
-  port: 3000,
+  port: 80,
   async fetch(req) {
     const url = new URL(req.url);
-    const targetUrl = new URL(url.pathname + url.search, TARGET_URL);
+    const targetUrl = new URL(url.pathname + url.search, g.targetUrl);
 
     g.reqs.set(req, {
       started: Date.now(),
@@ -21,14 +20,12 @@ g.server = serve({
 
     render(<App />);
     try {
-      // Forward the request to target server with SSL verification disabled
       const response = await fetch(targetUrl, {
         method: req.method,
         headers: req.headers,
         body: req.body,
       });
 
-      // Get response headers but remove content-encoding to prevent double compression
       const newHeaders = new Headers(response.headers);
       newHeaders.delete("content-encoding");
       g.reqs.delete(req);

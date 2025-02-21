@@ -1,0 +1,21 @@
+{
+  "name": "bun-proxy",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch --no-clear-screen index.tsx"
+  },
+  "dependencies": {
+    "ink": "^4.1.0",
+    "meow": "^11.0.0",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^18.2.0",
+    "prettier": "^2.8.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
